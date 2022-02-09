@@ -7,7 +7,8 @@
     "socket.io": "^4.4.1"
   },
   "scripts": {
-    "start": "nodemon Server.js"
+    "start": "nodemon Server.js",
+    "start2": "nodemon serv2.js"
   },
   "name": "labtest1",
   "version": "1.0.0",

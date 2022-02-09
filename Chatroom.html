@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //console.log()
+        
+        // document.getElementById('namie').innerHTML += inputName + "<br>"
+        // document.getElementById('code').innerHTML += passcode + "<br>"
+    </script>
+    <h1>Chat room here!</h1>
+    <p>if your looking at this then it's working!</p>
+    <p id="namie"></p>
+    <p id="code"></p>
+
+    <input id = "message" type = "text" name = "message" value = "" 
+    placeholder = "Enter message ">
+    <button type = "button" name = "button" onclick = "sendMessage()">
+        Send Message</button>
+
+    <div id ="message-container"></div>
+    
+</body>
+<script src = "/socket.io/socket.io.js"></script>
+<script>
+    const client = io()
+    client.emit('message', {name : 'Jeff'})
+
+    client.on("welcome",(data)=>{
+        console.log(data)
+        document.getElementById('message-container').innerHTML += "<div>"+ data + "</div>"
+        
+    })
+    client.on('newMessage',(message) =>{
+        //console.log(data)
+        document.getElementById('message-container').innerHTML += "<div>"+ message + "</div>"
+    })
+
+    function sendMessage(){
+        client.emit('message', document.getElementById('message').value)
+        console.log(document.getElementById('message').value+ ' Client side')
+    }
+
+</script>
+</html>

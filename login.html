@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lab Test</title>
+    <script>console.log("index running")</script>
 </head>
 <body>
     <h1>
@@ -12,18 +13,41 @@
     </h1>
     <div id = "error-container"></div>
 
-    <input id = "Login" type = "text" name = "name" value = "" 
-       placeholder = "Enter your name!">
-    <br/><br/>
-    <input id = "room" type = "text" name = "room" value = "" 
-    placeholder = "Enter Room name!">
-    <br/><br/>
- <button type = "button" name = "button" onclick = "Enter()">
-    Enter
- </button>
+    <form action="http://127.0.0.1:3005/gateway" method="get">
+        <input id = "Login" type = "text" name = "inputName" value = "" 
+        placeholder = "Enter your username!">
+     <br/><br/>
+     <input id = "room" type = "text" name = "passcode" value = "" 
+     placeholder = "Enter Password">
+     <br/><br/>
+     <input type="submit" value="Submit">
+  <!-- <button type = "button" name = "button" onclick = "enterChatRoom()">
+     Enter
+  </button> -->
+
+    </form>
+
+
+ <p id = "test"></p>
  
 </body>
+<!-- <script src = "/socket.io/socket.io.js"></script> -->
 <script>
+    //console.log("index running")
+    //let mongoose = require("mongoose")
+    console.log()
+    //const client = io()
+
+     function enterChatRoom(nmn,pass){
+         for(i = 0; i < users.length; i++){
+            if(nmn == users[i].userName && pass== users[i].password ){
+                console.log('this wont work')
+            }else{
+                console.log('nope')
+            }
+         }
+     }
+ 
 
 </script>
 </html>
