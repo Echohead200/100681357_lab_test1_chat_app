@@ -13,41 +13,31 @@
     </h1>
     <div id = "error-container"></div>
 
-    <form action="http://127.0.0.1:3005/gateway" method="get">
+    <form action="http://127.0.0.1:3000/gateway" method="get">
         <input id = "Login" type = "text" name = "inputName" value = "" 
         placeholder = "Enter your username!">
      <br/><br/>
      <input id = "room" type = "text" name = "passcode" value = "" 
      placeholder = "Enter Password">
      <br/><br/>
-     <input type="submit" value="Submit">
+     <input type="submit" value="Submit" onclick="startsession()">
   <!-- <button type = "button" name = "button" onclick = "enterChatRoom()">
      Enter
   </button> -->
-
     </form>
-
+    <br>
+    <a href="http://localhost:3000/signup.html">Sign up here </a>
 
  <p id = "test"></p>
  
 </body>
 <!-- <script src = "/socket.io/socket.io.js"></script> -->
 <script>
-    //console.log("index running")
-    //let mongoose = require("mongoose")
-    console.log()
-    //const client = io()
+ function startsession(var1){
+     sessionStorage.setItem("username", var1)
+     console.log(sessionStorage.getItem('username'))
 
-     function enterChatRoom(nmn,pass){
-         for(i = 0; i < users.length; i++){
-            if(nmn == users[i].userName && pass== users[i].password ){
-                console.log('this wont work')
-            }else{
-                console.log('nope')
-            }
-         }
-     }
- 
+ }
 
 </script>
 </html>

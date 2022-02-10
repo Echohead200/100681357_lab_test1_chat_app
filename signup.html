@@ -4,9 +4,62 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Signup</title>
 </head>
 <body>
+    <h1>Sign up Here!</h1>
+    <!-- //action="http://127.0.0.1:3000/user" -->
+    <form  id="myForm" name="myForm">
+        <input id="userName" type="text" name="userName" >Enter UserName
+        <br>
+        <input id="firstName" type="text" name="firstName" >Enter first name
+        <br>
+        <input id="lastName" type="text" name="lastName" >Enter last name
+        <br>
+        <input id="password" type="text" name="password" >Enter enter password
+        <br>
+        <input type="button" name="button" value="Join up! b" onclick="formcheck()">
+    </form>
+    <script>
+        
+        function formcheck(){
+            let Uer = document.getElementById("userName").value
+            let first = document.getElementById("firstName").value
+            let last = document.getElementById("lastName").value
+            let pass = document.getElementById("password").value
+            console.log(Uer)
+            console.log(first)
+            console.log(last)
+            console.log(pass)
+            let input =  JSON.stringify({"userName": Uer ,"firstName":first ,"lastName":last ,"password":pass})
+            console.log(input)
+            
+           
+            // jQuery.post("http://localhost:3000/user",
+            // {userName: Uer , firstName:first, lastName:last, password:pass})
+        }
+        //  const myForm = document.getElementById('myForm');
+        //  form.addEventListener('submit', function(e){
+        //      e.preventDefault();
+        //      const formData = new FormData(this)
+
+
+        //  });
+
+        // let formData = new FormData(myForm);
+        // console.log(formData)
+        // JSON.stringify(Object.fromEntries(formData.entries()));
+        
+        // var object = {};
+        // formData.forEach((value, key) => object[key] = value);
+        // var json = JSON.stringify(object);
+
+        
+        // const form = document.querySelector('form');
+        
+
+    </script>
+
     
 </body>
 </html>

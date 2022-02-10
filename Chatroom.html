@@ -9,9 +9,11 @@
 <body>
     <script>
         
-        //console.log()
         
-        // document.getElementById('namie').innerHTML += inputName + "<br>"
+        //console.log(sessionStorage.getItem('username'))
+        console.log(inputName)
+        
+        document.getElementById('namie').innerHTML += inputName + "<br>"
         // document.getElementById('code').innerHTML += passcode + "<br>"
     </script>
     <h1>Chat room here!</h1>
@@ -30,7 +32,7 @@
 <script src = "/socket.io/socket.io.js"></script>
 <script>
     const client = io()
-    client.emit('message', {name : 'Jeff'})
+    //client.emit('message', {name : 'Jeff'})
 
     client.on("welcome",(data)=>{
         console.log(data)
@@ -38,7 +40,7 @@
         
     })
     client.on('newMessage',(message) =>{
-        //console.log(data)
+        console.log("newmessage active")
         document.getElementById('message-container').innerHTML += "<div>"+ message + "</div>"
     })
 
@@ -46,6 +48,11 @@
         client.emit('message', document.getElementById('message').value)
         console.log(document.getElementById('message').value+ ' Client side')
     }
-
+    let testinfo = 'testroom'
+    function JoinRoom(){
+        client.emit('joinroom', testinfo)
+        //console.log(document.getElementById('room').value+ ' Client side')
+    }
+    JoinRoom()
 </script>
 </html>
