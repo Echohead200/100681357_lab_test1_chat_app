@@ -18,7 +18,7 @@
         <br>
         <input id="password" type="text" name="password" >Enter enter password
         <br>
-        <input type="button" name="button" value="Join up! b" onclick="formcheck()">
+        <input type="button" name="button" value="Join up!" onclick="formcheck()">
     </form>
     <script>
         
@@ -32,34 +32,16 @@
             console.log(last)
             console.log(pass)
             let input =  JSON.stringify({"userName": Uer ,"firstName":first ,"lastName":last ,"password":pass})
+            console.log(input)
             fetch("http://localhost:3000/user",{
                 method:"POST",
-                body: {"userName": Uer ,"firstName":first ,"lastName":last ,"password":pass}
+                body: input,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             })
             console.log(input)
-            
-           
-            // jQuery.post("http://localhost:3000/user",
-            // {userName: Uer , firstName:first, lastName:last, password:pass})
         }
-        //  const myForm = document.getElementById('myForm');
-        //  form.addEventListener('submit', function(e){
-        //      e.preventDefault();
-        //      const formData = new FormData(this)
-
-
-        //  });
-
-        // let formData = new FormData(myForm);
-        // console.log(formData)
-        // JSON.stringify(Object.fromEntries(formData.entries()));
-        
-        // var object = {};
-        // formData.forEach((value, key) => object[key] = value);
-        // var json = JSON.stringify(object);
-
-        
-        // const form = document.querySelector('form');
         
 
     </script>

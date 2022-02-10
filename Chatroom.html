@@ -7,19 +7,13 @@
     <title>Document</title>
 </head>
 <body>
+    
     <script>
-        
-        
-        //console.log(sessionStorage.getItem('username'))
-        console.log(inputName)
-        
-        document.getElementById('namie').innerHTML += inputName + "<br>"
-        // document.getElementById('code').innerHTML += passcode + "<br>"
+        console.log(sessionStorage.getItem('username'))
     </script>
     <h1>Chat room here!</h1>
     <p>if your looking at this then it's working!</p>
-    <p id="namie"></p>
-    <p id="code"></p>
+
 
     <input id = "message" type = "text" name = "message" value = "" 
     placeholder = "Enter message ">
@@ -42,13 +36,18 @@
     client.on('newMessage',(message) =>{
         console.log("newmessage active")
         document.getElementById('message-container').innerHTML += "<div>"+ message + "</div>"
+
     })
 
     function sendMessage(){
+        
+
         client.emit('message', document.getElementById('message').value)
-        console.log(document.getElementById('message').value+ ' Client side')
+     
+            console.log(document.getElementById('message').value+ ' Client side')
     }
     let testinfo = 'testroom'
+
     function JoinRoom(){
         client.emit('joinroom', testinfo)
         //console.log(document.getElementById('room').value+ ' Client side')

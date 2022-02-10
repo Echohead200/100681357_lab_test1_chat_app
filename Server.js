@@ -7,11 +7,12 @@ const cors = require('cors')
 const PORT = 3000
 let mongoose = require("mongoose")
 const userModel = require('./user')
-const { json } = require('body-parser')
+const messageModel =require('./Message')
+//const { json } = require('body-parser')
 
 const io = require('socket.io')(http)
 app.use(express.json())
-//app.use(cors())
+app.use(cors())
 
 var roomName = 'test'
 
@@ -32,6 +33,14 @@ io.on('connection',(socket)=>{
         console.log(data + ' ==> inbound')
         //socket.emit('newMessage', data)      
         io.to(roomName).emit('newMessage', data)
+        let input = JSON.stringify({"from_user": "Jeffrey", "room":roomName ,"message":data})
+        fetch("http://localhost:3000/messager",{
+                method:"POST",
+                body: input,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })  
     })
     socket.on('disconnect',() => {    
         console.log(`${socket.id} disconnected`)
@@ -61,6 +70,7 @@ app.get("/signup.html",(req,res)=>{
 
 
 app.get('/user', async (req, res) => {
+    console.log("tester /user")
     const user = await userModel.find({});
     try {
       //console.log(user[3].userName)
@@ -76,12 +86,12 @@ app.get('/user', async (req, res) => {
           passcode: req.query.passcode
       }
       const users = await userModel.find({})
-      console.log(response)
+      //console.log(response)
 
       try{
           for(i=0;i<users.length;i++){
               if(response.inputName == users[i].userName && response.passcode == users[i].password){
-                  console.log("Success! it works!")
+                  //console.log("Success! it works!")
                   res.sendFile(__dirname + "/Chatroom.html")
                   //res.url(__dirname + "/Chatroom.html")
                   //res.end(JSON.stringify(users[i].userName+ " " + users[i].password));
@@ -95,7 +105,6 @@ app.get('/user', async (req, res) => {
         res.status(500).send(err);
       }
   })
-
 
 
 //Add to database
@@ -116,11 +125,40 @@ app.post('/user', async (req,res) =>{
     }
 })
 
+app.get('/message_poster', async (req, res) => {
+    console.log("tester /message_poster")
+    const talk = await messageModel.find({});
+    try {
+      //console.log(user[3].userName)
+      res.status(200).send(talk);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  });
+  
+app.post('message_poster',async(req,res)=>{
+    console.log("message post is working")
+    console.log(req.body)
+    const talk = new messageModel(req.body)
+    try{
+        await talk.save((err)=>{
+            if(err){
+                res.send(err)
+            }else{
+             res.send(talk)   
+            }
+        })
+    }catch(err){
+        res.status(500).send(err)
+    }
+})
+
 
 
 var server = http.listen(PORT,()=>{
     var host = server.address().address
     console.log(`Server started at ${PORT}`, host)
+    
 })
 // const Port2 = 3001
 // http.listen(Port2, () => {
