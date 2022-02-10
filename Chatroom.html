@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>ChatRoom</title>
 </head>
 <body>
     
     <script>
-        console.log(sessionStorage.getItem('username'))
+        //console.log(response)
     </script>
     <h1>Chat room here!</h1>
     <p>if your looking at this then it's working!</p>
@@ -30,8 +30,7 @@
 
     client.on("welcome",(data)=>{
         console.log(data)
-        document.getElementById('message-container').innerHTML += "<div>"+ data + "</div>"
-        
+        document.getElementById('message-container').innerHTML += "<div>"+ data + "</div>"       
     })
     client.on('newMessage',(message) =>{
         console.log("newmessage active")
@@ -40,10 +39,16 @@
     })
 
     function sendMessage(){
-        
-
-        client.emit('message', document.getElementById('message').value)
-     
+        let mInput = document.getElementById('message').value
+        client.emit('message', mInput)
+        let input = JSON.stringify({"from_user": "Jeffrey", "room": testinfo ,"message":mInput})
+        fetch("http://localhost:3000/messageposter",{
+                method:"POST",
+                body: input,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })     
             console.log(document.getElementById('message').value+ ' Client side')
     }
     let testinfo = 'testroom'
