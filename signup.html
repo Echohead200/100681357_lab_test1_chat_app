@@ -32,6 +32,10 @@
             console.log(last)
             console.log(pass)
             let input =  JSON.stringify({"userName": Uer ,"firstName":first ,"lastName":last ,"password":pass})
+            fetch("http://localhost:3000/user",{
+                method:"POST",
+                body: {"userName": Uer ,"firstName":first ,"lastName":last ,"password":pass}
+            })
             console.log(input)
             
            
